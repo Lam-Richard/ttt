@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     @State private var isPressed = false
     @State private var buttonText = "Start"
+    
+    @State private var minutes: String = "20"
+    @State private var seconds: String = "00"
+
 
     func toggleTimer() {
         isPressed.toggle()
@@ -27,7 +31,13 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             
-            Text("Hello")
+            HStack {
+                TextField("20", text: $minutes)
+                    .frame(width:25)
+                Text(":")
+                TextField("00", text: $seconds)
+                    .frame(width:25)
+            }
             
             Button(action: toggleTimer) {
                 Text(buttonText)
