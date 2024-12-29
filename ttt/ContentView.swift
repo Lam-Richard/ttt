@@ -21,6 +21,8 @@ struct ContentView: View {
 	@State private var seconds: String = "00"
 	@State private var waitTime: Int = 0
 	
+	@State private var isButtonDisabled = false
+	
 	@EnvironmentObject var appState: AppState
 	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -84,13 +86,18 @@ struct ContentView: View {
 		
 		if (amt == 0) {
 			buttonText = "Start"
-			
+			isButtonDisabled = true
+
 			if (waitTime == 0) {
 				createOverlayWindow()
-			} else if (waitTime == 20) {
+			} else if (waitTime == 20 || !appState.showOverlay) {
 				waitTime = 0
 				isPaused = true
 				closeOverlayWindow()
+				isButtonDisabled = false
+				appState.showOverlay = true
+				minutes = "20"
+				seconds = "00"
 				return
 			}
 			
@@ -128,8 +135,8 @@ struct ContentView: View {
             }
 
             Button(action: toggleTimer) {
-                Text(buttonText)
-            }
+				Text(buttonText)
+            }.disabled(isButtonDisabled)
         }
         .padding(20)
     }
