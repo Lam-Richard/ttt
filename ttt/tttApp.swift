@@ -11,7 +11,7 @@ import SwiftUI
 struct tttApp: App {
     var body: some Scene {
         MenuBarExtra("App") {
-            ContentView().frame(width: 400, height: 600)
+            ContentView().frame(width: 150, height: 125)
         }
         .menuBarExtraStyle(.window)
     }
