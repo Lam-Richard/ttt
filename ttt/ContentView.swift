@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.openWindow) private var openWindow
+    
     @State private var isPaused = true
     @State private var buttonText = "Start"
     
@@ -25,8 +27,9 @@ struct ContentView: View {
 		var amt: Int = Int(minutes)! * 60 + Int(seconds)!
 		if (amt == 0) {
 			isPaused = true
-			
-			// poop
+			buttonText = "Start"
+            
+            openWindow(id: "newWindow")
 			
 			minutes = "20"
 			seconds = "00"
